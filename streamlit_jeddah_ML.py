@@ -91,7 +91,7 @@ if st.button("Run Decision Tree Classification"):
         X = data[ml_columns]
         y = data["Situation"]
 
-        model = DecisionTreeClassifier(random_state=42)
+        model = DecisionTreeClassifier(random_state=42, max_depth=5)
         model.fit(X, y)
 
         data["Predicted Situation"] = model.predict(X)
@@ -109,9 +109,9 @@ if st.button("Run Decision Tree Classification"):
 
         st.dataframe(data[["Date", feature, "Situation", "Predicted Situation"]])
 
-        st.subheader("Full Decision Tree Visualization")
+        st.subheader("Decision Tree Visualization (depth ≤ 5)")
 
-        fig_tree, ax = plt.subplots(figsize=(100, 71))
+        fig_tree, ax = plt.subplots(figsize=(24, 10))
 
         plot_tree(
             model,
@@ -119,7 +119,7 @@ if st.button("Run Decision Tree Classification"):
             class_names=list(model.classes_),
             filled=True,
             rounded=True,
-            fontsize=55,
+            fontsize=10,
             ax=ax
         )
 
